@@ -1,0 +1,85 @@
+.container {
+  display: flex;
+  background-size: cover !important;
+  background-position: top !important;
+  background-repeat: no-repeat !important;
+  color: white;
+  height: 92vh;
+}
+
+.overlay {
+  position: absolute;
+  background: rgb(0, 0, 0);
+  color: #f1f1f1;
+  width: 100%;
+  height: 92%;
+  opacity: 0.6;
+  color: white;
+}
+
+.poster {
+  width: 100%;
+  height: auto;
+}
+
+.details {
+  padding-left: 30px;
+  padding-top: 30px;
+  width: 50%;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.details-tray {
+  display: flex;
+  flex-direction: row;
+  padding: 10px 0 10px 0;
+  width: 30%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.description {
+  margin-top: 20px;
+  width: 80%;
+}
+
+h4 {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.other-details {
+  margin-top: 20px;
+}
+.other-details-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.other-details p {
+  margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 780px) {
+  .container {
+    flex-direction: column;
+    height: 100vh;
+  }
+  .overlay {
+    height: 100vh;
+  }
+
+  .details {
+    padding: 20px;
+    width: 90%;
+  }
+  .details-tray {
+    width: 60%;
+  }
+}

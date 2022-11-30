@@ -1,0 +1,48 @@
+<div
+  class="container"
+  *ngIf="movie != undefined"
+  [style.background]="
+    'url(https://www.themoviedb.org/t/p/w1280' + movie.backdrop_path + ')'
+  "
+>
+  <div class="overlay">
+    <!-- <div>
+    <img
+      class="poster"
+      [src]="'https://www.themoviedb.org/t/p/w1280' + movie.backdrop_path"
+      alt="movie poster"
+    />
+  </div> -->
+    <div class="details">
+      <div class="title">
+        {{ movie.original_title }}
+      </div>
+      <div class="details-tray">
+        <span>{{ movie.status }}</span>
+        <span>|</span>
+        <span> {{ movie.runtime }}m</span>
+        <span>|</span>
+        <span>{{ movie.vote_average }}</span>
+      </div>
+      <div class="description">
+        {{ movie.overview }}
+      </div>
+
+      <div class="other-details">
+        <p class="other-details-title">Other Details:</p>
+        <p>
+          <b>Release Date : </b><span>{{ movie.release_date }}</span>
+        </p>
+        <p>
+          <b>Language : </b><span>{{ movie.original_language }}</span>
+        </p>
+        <p>
+          <b>Budget : </b><span>${{ movie.budget }}</span>
+        </p>
+        <p>
+          <b>Revenue : </b><span>${{ movie.revenue }}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

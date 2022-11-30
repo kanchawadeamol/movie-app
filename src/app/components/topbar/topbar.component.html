@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="branding align-content"><a href="/">Movie App</a></div>
+  <div class="search-container align-content">
+    <input
+      [(ngModel)]="searchText"
+      (keypress)="searchOnEnter($event)"
+      type="text"
+      class="searchbar"
+      placeholder="Search..."
+    />
+    <button (click)="searchMovie()">Search</button>
+  </div>
+  <div></div>
+</div>

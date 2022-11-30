@@ -1,0 +1,21 @@
+<div class="container">
+  <div
+    class="card"
+    (click)="viewMovie(movie.id)"
+    *ngFor="let movie of movieService.movieList"
+  >
+    <img
+      class="cover"
+      [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
+      alt="movie poster"
+    />
+    <div class="title">
+      {{ movie.original_title }} ({{ movie.vote_average }})
+    </div>
+  </div>
+</div>
+
+<div class="pagination" *ngIf="!movieService.searchedMovieList">
+  <span (click)="prevPage()">Prev</span>
+  <span (click)="nextPage()">Next</span>
+</div>
