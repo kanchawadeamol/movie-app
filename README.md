@@ -1,6 +1,28 @@
 # MovieApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.10.
+This project is based on Movies and I used themoviedb api to show the movies in this app.
+App is build using angular 14.
+
+## [Click here for the demo](https://movie-app-ak24.web.app/)
+
+## Features
+
+1. You can check Movies List with filter like Top rated and upcoming
+2. Movoe search
+3. You can check Details of each Movie with information like movie release date, trailor etc..
+4. After login you can add and remove movie to/from your favorite list and watch list
+
+## App is created using
+
+1. Modules
+2. Routes
+3. Services
+4. Components
+5. Forms Module
+6. Reactive Forms
+7. Angular Material
+8. Firebase Auth
+9. Bootstrap
 
 ## Development server
 
