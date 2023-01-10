@@ -41,7 +41,7 @@ export class AuthService {
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.SetUserData(result.user);
-        // this.movieService.requestTokenValidation();
+        this.movieService.requestTokenValidation();
         this.afAuth.authState.subscribe((user) => {
           if (user) {
             this.router.navigate(['home']);
@@ -61,7 +61,6 @@ export class AuthService {
       .then((result) => {
         this.SendVerificationMail();
         this.SetUserData(result.user);
-        this.movieService.requestTokenValidation();
       })
       .catch((error) => {
         this.snackbar.open(error.message.slice(10), 'ok', { duration: 5000 });

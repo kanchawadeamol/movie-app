@@ -17,9 +17,9 @@
         "
         alt="poster"
       />
-      <div class="watch-movie-btn">
+      <!-- <div class="watch-movie-btn" (click)="getVideos(movie.id)">
         <a class="">Watch Movie</a>
-      </div>
+      </div> -->
     </div>
     <div class="details">
       <div class="title">
@@ -66,7 +66,9 @@
         <!-- <mat-icon>star</mat-icon> -->
         <div class="play-trailor">
           <mat-icon>play_arrow</mat-icon>
-          <span>Play Trailor</span>
+          <span (click)="openTrailor(movie.id)" *ngIf="trailerKey != null"
+            >Play Trailor</span
+          >
         </div>
       </div>
       <div class="overview">

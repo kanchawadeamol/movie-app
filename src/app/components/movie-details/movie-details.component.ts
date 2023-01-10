@@ -16,6 +16,8 @@ export class MovieDetailsComponent implements OnInit {
   user: any = [];
   isFavorite: boolean = false;
   isInWatchList: boolean = false;
+  trailerKey: string = '';
+  videos: any = [];
 
   constructor(
     public movieService: MovieService,
@@ -136,6 +138,24 @@ export class MovieDetailsComponent implements OnInit {
             this.isInWatchList = false;
           }
         });
+      })
+      .catch((err) => {});
+  }
+
+  openTrailor(movieId: string) {
+    this.movieService
+      .getVideos(movieId)
+      .then((res: any) => {
+        this.videos = res.results;
+        const trailorArray = this.videos.filter(
+          (data: any) =>
+            data.type == 'Trailer' &&
+            data.site == 'YouTube' &&
+            data.name == 'Official Teaser Trailer'
+        );
+
+        this.trailerKey = trailorArray[0].key;
+        window.open(`https://www.youtube.com/watch?v=${this.trailerKey}`);
       })
       .catch((err) => {});
   }

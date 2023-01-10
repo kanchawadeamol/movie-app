@@ -199,6 +199,7 @@ h4 {
   }
   .play-trailor {
     margin-top: 10px;
+    cursor: pointer;
   }
 
   .details {
