@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { RequestTokenInterface, SessionIdInterface } from '../models/movie';
 
 @Injectable({
@@ -13,7 +14,11 @@ export class MovieService {
   searchedMovieList: boolean = false;
   movieFilter: string = 'popular';
 
-  constructor(private http: HttpClient, private snackbar: MatSnackBar) {}
+  constructor(
+    private http: HttpClient,
+    private snackbar: MatSnackBar,
+    private router: Router
+  ) {}
 
   getMovieList() {
     return new Promise((resolve, reject) => {
@@ -87,7 +92,7 @@ export class MovieService {
     this.requestToken().then(
       (response) => {
         window.open(
-          `https://www.themoviedb.org/authenticate/${response?.request_token}?redirect_to=http://localhost:4200/home`,
+          `https://www.themoviedb.org/authenticate/${response?.request_token}?redirect_to=https://movie-app-ak24.web.app/home`,
           '_self'
         );
       },
@@ -206,6 +211,23 @@ export class MovieService {
         .get(
           `
           https://api.themoviedb.org/3/account/${userId}/watchlist/movies?api_key=59458baf36700a45b24324d33c819a96&session_id=${sessionId}&language=en-US&sort_by=created_at.asc&page=1`
+        )
+        .subscribe(
+          (res: any) => {
+            resolve(res);
+          },
+          (err) => {
+            reject(err);
+          }
+        );
+    });
+  }
+
+  getVideos(movieId: string) {
+    return new Promise((resolve, reject) => {
+      this.http
+        .get(
+          `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=59458baf36700a45b24324d33c819a96&language=en-US`
         )
         .subscribe(
           (res: any) => {
