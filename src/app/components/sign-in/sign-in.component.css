@@ -1,0 +1,36 @@
+.container {
+  height: 90vh;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.form-container {
+  box-shadow: 0 2px 6px 1px rgb(0 0 0 / 20%);
+  padding: 50px;
+  width: 370px;
+}
+
+.googleBtn .bi {
+  margin-right: 8px;
+  font-size: 14px;
+  color: #e03f32;
+}
+.redirect {
+  color: #4285f4;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.btn {
+  width: 90%;
+  margin: auto;
+}
+
+.google-icon {
+  width: 20px;
+  margin-right: 5px;
+}

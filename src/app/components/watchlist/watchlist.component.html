@@ -1,0 +1,44 @@
+<div class="container">
+  <h1>My Watch List</h1>
+  <div class="content-container">
+    <ng-container *ngIf="watchList.length > 0; else noWatchList">
+    </ng-container>
+    <ng-container *ngFor="let movie of watchList">
+      <div class="card" (click)="viewMovie(movie.id)">
+        <div class="delete-btn-div">
+          <mat-icon
+            class="delete-btn"
+            (click)="removeFromWatchList(movie.id, $event)"
+            >delete</mat-icon
+          >
+        </div>
+        <div class="image-section">
+          <img
+            class="cover"
+            [src]="
+              movie.poster_path
+                ? 'https://image.tmdb.org/t/p/w500/' + movie.poster_path
+                : 'assets/default-movie-poster.jpg'
+            "
+            alt="movie poster"
+          />
+          <div class="vote-average">
+            <circle-progress
+              [percent]="movie.vote_average * 10"
+            ></circle-progress>
+          </div>
+        </div>
+
+        <div class="title">
+          {{ movie.original_title ?? movie.name }}
+        </div>
+        <div class="relese-date">
+          {{ movie.release_date ?? movie.first_air_date | date : "d MMM yyyy" }}
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #noWatchList>
+      <div>There is no movie in your watch list</div>
+    </ng-template>
+  </div>
+</div>

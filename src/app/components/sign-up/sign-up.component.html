@@ -1,0 +1,69 @@
+<div class="container">
+  <div
+    class="d-flex flex-column justify-content-center align-items-center h-100"
+  >
+    <div class="form-container d-flex flex-column justify-content-center">
+      <h1 class="text-center">Sign Up</h1>
+      <form [formGroup]="signUpForm">
+        <mat-form-field appearance="outline">
+          <mat-label>Enter you email</mat-label>
+          <input matInput formControlName="email" #email />
+          <mat-error *ngIf="signUpForm.controls.email.invalid">
+            {{
+              signUpForm.controls.email.hasError("required")
+                ? "Email is required"
+                : "Please enter a vaild email"
+            }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Enter you password</mat-label>
+          <input
+            type="password"
+            matInput
+            formControlName="password"
+            #userPassword
+          />
+          <mat-error *ngIf="signUpForm.controls.password.invalid">
+            {{
+              signUpForm.controls.password.hasError("required")
+                ? "Password is required"
+                : "Password should be atleast 6 characters"
+            }}
+          </mat-error>
+        </mat-form-field>
+        <div class="form-group row">
+          <input
+            type="button mt-4"
+            [disabled]="signUpForm.invalid"
+            class="btn btn-primary"
+            value="Sign Up"
+            (click)="authService.SignUp(email.value, userPassword.value)"
+          />
+        </div>
+      </form>
+      <div class="form-group row">
+        <span class="or text-center"><span class="orInner">Or</span></span>
+      </div>
+      <!-- Continue with Google -->
+      <div class="form-group row">
+        <button
+          type="button"
+          class="googleBtn btn d-flex justify-content-center align-items-center border rounded"
+          (click)="authService.GoogleAuth()"
+        >
+          <img class="google-icon" src="assets/google-icon.svg" /> Log in with
+          Google
+        </button>
+      </div>
+      <div class="redirectToLogin text-center">
+        <span
+          >Already have an account?
+          <span role="button" class="redirect" routerLink="/sign-in"
+            >Log In</span
+          ></span
+        >
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { MovieService } from 'src/app/services/movie.service';
 
 @Component({
@@ -8,10 +9,17 @@ import { MovieService } from 'src/app/services/movie.service';
   styleUrls: ['./topbar.component.css'],
 })
 export class TopbarComponent implements OnInit {
+  user: any;
   searchText: string = '';
-  constructor(public movieService: MovieService, private router: Router) {}
+  constructor(
+    public movieService: MovieService,
+    private router: Router,
+    public authService: AuthService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.user = JSON.parse(localStorage.getItem('user')!);
+  }
 
   searchMovie() {
     this.router.navigate(['/home']);

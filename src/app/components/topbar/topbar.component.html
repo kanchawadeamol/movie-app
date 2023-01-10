@@ -1,4 +1,4 @@
-<div class="container">
+<div class="header-container">
   <div class="branding align-content"><a href="/">Movie App</a></div>
   <div class="search-container align-content">
     <input
@@ -10,5 +10,28 @@
     />
     <button (click)="searchMovie()">Search</button>
   </div>
-  <div></div>
+  <div class="login-btn" *ngIf="!authService.isLoggedIn" routerLink="/sign-in">
+    Login
+    <mat-icon>login</mat-icon>
+  </div>
+  <div class="account" *ngIf="authService.isLoggedIn">
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon *ngIf="!user?.photoURL || user?.photoURL == ''"
+        >account_circle</mat-icon
+      >
+      <img [src]="user?.photoURL" *ngIf="user?.photoURL" class="profilePic" />
+    </button>
+    <mat-menu id="menuItem" #menu="matMenu">
+      <p class="username" mat-menu-item>
+        {{ user?.displayName ?? user?.email }}
+      </p>
+      <p class="mypost-link" routerLink="/favorite-movie-list" mat-menu-item>
+        Favorite Movies
+      </p>
+      <p class="mypost-link" routerLink="/my-watch-list" mat-menu-item>
+        My Watch List
+      </p>
+      <p (click)="authService.SignOut()" mat-menu-item>Logout</p>
+    </mat-menu>
+  </div>
 </div>

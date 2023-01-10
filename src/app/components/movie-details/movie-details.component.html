@@ -1,47 +1,109 @@
 <div
-  class="container"
+  class="details-container"
   *ngIf="movie != undefined"
   [style.background]="
     'url(https://www.themoviedb.org/t/p/w1280' + movie.backdrop_path + ')'
   "
 >
-  <div class="overlay">
-    <!-- <div>
-    <img
-      class="poster"
-      [src]="'https://www.themoviedb.org/t/p/w1280' + movie.backdrop_path"
-      alt="movie poster"
-    />
-  </div> -->
+  <div class="overlay"></div>
+  <div class="content-section">
+    <div class="poster">
+      <img
+        class="poster-img"
+        [src]="
+          movie.poster_path
+            ? 'https://www.themoviedb.org/t/p/w1280' + movie.poster_path
+            : 'assets/default-movie-poster.jpg'
+        "
+        alt="poster"
+      />
+      <div class="watch-movie-btn">
+        <a class="">Watch Movie</a>
+      </div>
+    </div>
     <div class="details">
       <div class="title">
-        {{ movie.original_title }}
+        {{ movie.original_title ?? movie.name }} ({{
+          movie.release_date ?? movie.first_air_date | date : "yyyy"
+        }})
       </div>
       <div class="details-tray">
-        <span>{{ movie.status }}</span>
+        <span class="release-status" *ngIf="movie.status">{{
+          movie.status.charAt(0).toUpperCase()
+        }}</span>
+        <span class="release-date">{{
+          movie.release_date ?? movie.first_air_date | date : "d/M/yyyy"
+        }}</span>
         <span>|</span>
-        <span> {{ movie.runtime }}m</span>
-        <span>|</span>
-        <span>{{ movie.vote_average }}</span>
+        <div
+          class="generes"
+          *ngFor="let genre of movie.genres; let last = last"
+        >
+          <span class="genre">{{ genre.name }}</span>
+          <span *ngIf="!last">,</span>
+        </div>
+        <span *ngIf="movie.runtime">|</span>
+        <span *ngIf="movie.runtime">
+          {{ movie.runtime / 60 | number : "1.0-0" }}h {{ movie.runtime % 60 }}m
+        </span>
       </div>
-      <div class="description">
-        {{ movie.overview }}
+      <div class="user-options">
+        <div class="user-score-section">
+          <circle-progress [percent]="50"></circle-progress>
+          <span>User <br />Score</span>
+        </div>
+        <!-- <mat-icon>view_list</mat-icon> -->
+        <mat-icon
+          (click)="addOrRemoveFavorite(movie.id)"
+          [ngClass]="{ favorite: isFavorite }"
+          >favorite</mat-icon
+        >
+        <mat-icon
+          (click)="addOrRemoveWatchList(movie.id)"
+          [ngClass]="{ watched: isInWatchList }"
+          >turned_in</mat-icon
+        >
+        <!-- <mat-icon>star</mat-icon> -->
+        <div class="play-trailor">
+          <mat-icon>play_arrow</mat-icon>
+          <span>Play Trailor</span>
+        </div>
       </div>
-
-      <div class="other-details">
-        <p class="other-details-title">Other Details:</p>
-        <p>
-          <b>Release Date : </b><span>{{ movie.release_date }}</span>
+      <div class="overview">
+        <p class="title">Overview</p>
+        <p class="description">
+          {{ movie.overview }}
         </p>
-        <p>
-          <b>Language : </b><span>{{ movie.original_language }}</span>
-        </p>
-        <p>
-          <b>Budget : </b><span>${{ movie.budget }}</span>
-        </p>
-        <p>
-          <b>Revenue : </b><span>${{ movie.revenue }}</span>
-        </p>
+        <div class="other-details">
+          <div>
+            <p><b>Budget</b></p>
+            <p>${{ movie.budget }}</p>
+          </div>
+          <div>
+            <p><b>Revenue</b></p>
+            <p>${{ movie.revenue }}</p>
+          </div>
+        </div>
+        <div *ngIf="movie.production_companies" class="company-section">
+          <p><b>Production Companies</b></p>
+          <div class="company-container">
+            <div
+              class="company"
+              *ngFor="let company of movie.production_companies"
+            >
+              <img
+                class="company-logo"
+                [src]="
+                  company.logo_path
+                    ? 'https://www.themoviedb.org/t/p/w1280' + company.logo_path
+                    : 'assets/default-company-logo.png'
+                "
+                alt="Company Logo"
+              />
+              <p class="company-title">{{ company.name }}</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

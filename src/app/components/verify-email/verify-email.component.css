@@ -1,0 +1,13 @@
+.inner-container {
+  height: 90vh;
+  text-align: center;
+}
+
+.content {
+  box-shadow: 0 2px 6px 1px rgb(0 0 0 / 20%);
+  padding: 50px;
+}
+
+.redirect {
+  color: #4285f4;
+}

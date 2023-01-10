@@ -1,8 +1,13 @@
-.container {
-  display: grid;
-  grid-template-columns: auto auto auto;
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   height: 60px;
-  background-color: rgb(0, 137, 216);
+  background-color: #0089d8;
+  position: fixed;
+  width: 100%;
+  z-index: 3;
+  padding: 0px 20px;
 }
 
 .align-content {
@@ -14,15 +19,14 @@
 .branding a {
   font-size: 20px;
   color: white;
-  padding-left: 40px;
   font-weight: 700;
   letter-spacing: 2px;
   text-decoration: none;
 }
 
 .searchbar {
-  width: 80%;
-  height: 60%;
+  width: 350px;
+  padding: 8px;
   border-radius: 3px;
   border: none;
   padding-left: 10px;
@@ -30,7 +34,7 @@
 }
 
 .search-container button {
-  height: 60%;
+  padding: 8px;
   width: 60px;
   margin-left: -60px;
   z-index: 2;
@@ -38,4 +42,34 @@
   background-color: rgb(3 99 155);
   color: white;
   cursor: pointer;
+}
+
+.account {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 50%;
+  height: 100%;
+  align-items: center;
+  padding-right: 20px;
+}
+
+.profilePic {
+  width: 40px;
+  border-radius: 50%;
+}
+
+.username {
+  border-bottom: 1px solid !important;
+  text-align: center !important;
+}
+
+.login-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #03639b;
+  height: 35px;
+  padding: 0px 10px;
+  border-radius: 4px;
+  color: white;
 }

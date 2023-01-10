@@ -1,0 +1,75 @@
+<div class="container">
+  <div
+    class="d-flex flex-column justify-content-center align-items-center h-100"
+  >
+    <div class="form-container d-flex flex-column justify-content-center">
+      <h1 class="text-center">Sign In</h1>
+      <form [formGroup]="signInForm">
+        <mat-form-field appearance="outline">
+          <mat-label>Enter you username</mat-label>
+          <input matInput formControlName="username" #userName />
+          <mat-error *ngIf="signInForm.controls.username.invalid">
+            {{
+              signInForm.controls.username.hasError("required")
+                ? "Username is required"
+                : "Please enter a vaild email"
+            }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Enter you password</mat-label>
+          <input
+            type="password"
+            matInput
+            formControlName="password"
+            #userPassword
+          />
+          <mat-error *ngIf="signInForm.controls.password.invalid">
+            {{ "Password is required" }}
+          </mat-error>
+        </mat-form-field>
+
+        <div class="form-group row">
+          <input
+            type="submit"
+            [disabled]="signInForm.invalid"
+            class="btn btn-primary"
+            value="Log in"
+            (click)="authService.SignIn(userName.value, userPassword.value)"
+          />
+        </div>
+      </form>
+      <div class="form-group row">
+        <span class="or text-center"><span class="orInner">Or</span></span>
+      </div>
+      <!-- Calling GoogleAuth Api from AuthService -->
+      <div class="form-group row">
+        <button
+          type="button"
+          class="googleBtn btn d-flex justify-content-center align-items-center border rounded"
+          (click)="authService.GoogleAuth()"
+        >
+          <!-- <mat-icon>auth_service_google_24dp</mat-icon> -->
+          <img class="google-icon" src="assets/google-icon.svg" /> Log in with
+          Google
+        </button>
+      </div>
+      <div class="forgotPassword text-center pb-2">
+        <span role="button" routerLink="/forgot-password"
+          >Forgot Password?</span
+        >
+      </div>
+      <div class="redirectToLogin text-center">
+        <span
+          >Don't have an account?<span
+            class="redirect"
+            routerLink="/register-user"
+            role="button"
+          >
+            Sign Up</span
+          ></span
+        >
+      </div>
+    </div>
+  </div>
+</div>

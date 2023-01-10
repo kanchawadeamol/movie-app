@@ -1,21 +1,61 @@
-<div class="container">
+<div class="container tw-bg-grey">
   <div
-    class="card"
-    (click)="viewMovie(movie.id)"
-    *ngFor="let movie of movieService.movieList"
+    class="top-section tw-flex tw-flex-column tw-justify-between"
+    *ngIf="!movieService.searchedMovieList"
   >
-    <img
-      class="cover"
-      [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
-      alt="movie poster"
-    />
-    <div class="title">
-      {{ movie.original_title }} ({{ movie.vote_average }})
+    <div class="filters tw-flex tw-mb-4">
+      <mat-form-field appearance="fill">
+        <mat-label>Filter</mat-label>
+        <mat-select (selectionChange)="filter($event)" name="movie-filter">
+          <!-- <mat-option value="popular">Popular</mat-option> -->
+          <mat-option value="top_rated">Top Rated</mat-option>
+          <mat-option value="upcoming">Upcoming</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <p class="tw-font-bold tw-text-base">
+      Page : {{ movieService.pageNumber }}
+    </p>
+  </div>
+  <div class="content-container">
+    <div
+      class="card"
+      (click)="viewMovie(movie.id)"
+      *ngFor="let movie of movieService.movieList"
+    >
+      <div class="image-section">
+        <img
+          class="cover"
+          [src]="
+            movie.poster_path
+              ? 'https://image.tmdb.org/t/p/w500/' + movie.poster_path
+              : 'assets/default-movie-poster.jpg'
+          "
+          alt="movie poster"
+        />
+        <div class="vote-average">
+          <circle-progress
+            [percent]="movie.vote_average * 10"
+          ></circle-progress>
+        </div>
+      </div>
+
+      <div class="title">
+        {{ movie.original_title ?? movie.name }}
+      </div>
+      <div class="relese-date">
+        {{ movie.release_date ?? movie.first_air_date | date : "d MMM yyyy" }}
+      </div>
     </div>
   </div>
-</div>
 
-<div class="pagination" *ngIf="!movieService.searchedMovieList">
-  <span (click)="prevPage()">Prev</span>
-  <span (click)="nextPage()">Next</span>
+  <div class="pagination" *ngIf="!movieService.searchedMovieList">
+    <span
+      (click)="prevPage()"
+      class="tw-bg-[#0089d8] tw-text-white"
+      [ngClass]="movieService.pageNumber === 1 ? 'tw-bg-grey' : ''"
+      >Prev</span
+    >
+    <span (click)="nextPage()" class="tw-bg-[#0089d8] tw-text-white">Next</span>
+  </div>
 </div>
